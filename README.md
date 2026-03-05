@@ -14,4 +14,4 @@
 
 ## Схема взаимодействия
 
-![Схема взаимодействия](docs/interaction_scheme.png)
+![Схема взаимодействия](assets/interaction_scheme.png)
