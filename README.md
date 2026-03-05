@@ -9,15 +9,8 @@
 
 ## Архитектура
 
-VM1 (Ubuntu)
------------------------
-Backend API
-PostgreSQL 15+
-
-VM2 (CentOS)
------------------------
-Proxy API
-Redis 7+
+VM1 (Ubuntu): Backend API + PostgreSQL 15+
+VM2 (CentOS): Proxy API + Redis 7+
 
 ## Схема взаимодействия
 
