@@ -1,6 +1,6 @@
 1. Разворачивание ВМ 
 
-![Развернутые ВМ в VirtualBox](assets/vm.png)
+![Развернутые ВМ в VirtualBox](../assets/vm.png)
 
 2. Установка PostgreSQL на VM1 (Ubuntu):  
 
