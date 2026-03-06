@@ -1,4 +1,8 @@
-Установка PostgreSQL на VM1 (Ubuntu):  
+1. Разворачивание ВМ 
+
+СЮДА картинки из VirtualBox
+
+2. Установка PostgreSQL на VM1 (Ubuntu):  
 
 ```bash
 sudo apt update
@@ -7,7 +11,7 @@ sudo systemctl start postgresql
 sudo systemctl enable postgresql
 ```
 
-Установка Redis на VM2 (CentOS):  
+3. Установка Redis на VM2 (CentOS), используется форк Valkey 8.0.6:  
 
 ```bash
 sudo dnf update  
@@ -16,7 +20,7 @@ sudo systemctl start valkey
 sudo systemctl enable valkey
 ```
 
-Клонируем Git-репозиторий на VM1, запускаем создание БД:
+4. Клонируем Git-репозиторий на VM1, запускаем создание БД:
 
 ```bash
 cd db
