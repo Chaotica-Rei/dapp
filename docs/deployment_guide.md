@@ -15,3 +15,10 @@ sudo dnf install valkey
 sudo systemctl start valkey  
 sudo systemctl enable valkey
 ```
+
+Клонируем Git-репозиторий на VM1, запускаем создание БД:
+
+```bash
+cd db
+psql -f init.sql
+```
