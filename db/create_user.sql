@@ -7,5 +7,8 @@ DROP ROLE IF EXISTS testuser;
 CREATE USER testuser WITH PASSWORD 'testpass';
 
 -- Выдаем базовые права на создание БД и объектов
+GRANT CONNECT ON DATABASE test TO testuser;
 GRANT CREATE ON DATABASE postgres TO testuser;
 GRANT USAGE, CREATE ON SCHEMA public TO testuser;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO testuser;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO testuser;
