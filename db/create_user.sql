@@ -1,14 +1,16 @@
--- Запуск от имени пользователя postgres через psql -U postgres -f create_user.sql
+-- Запуск через psql -U postgres -f create_user.sql
 
--- Удаляем пользователя, если он существует
+-- Удаляем БД если существует
+DROP DATABASE IF EXISTS test;
+
+-- Удаляем пользователя если существует
 DROP ROLE IF EXISTS testuser;
 
--- Создаём пользователя testuser с паролем
+-- Создаем пользователя
 CREATE USER testuser WITH PASSWORD 'testpass';
 
--- Выдаем базовые права на создание БД и объектов
-GRANT CONNECT ON DATABASE test TO testuser;
-GRANT CREATE ON DATABASE postgres TO testuser;
-GRANT USAGE, CREATE ON SCHEMA public TO testuser;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO testuser;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO testuser;
+-- Создаем базу данных и сразу назначаем владельца
+CREATE DATABASE test OWNER testuser;
+
+-- Даём все права на БД
+GRANT ALL PRIVILEGES ON DATABASE test TO testuser;

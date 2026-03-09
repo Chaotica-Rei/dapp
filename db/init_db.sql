@@ -20,7 +20,7 @@ CREATE TABLE users (
     email VARCHAR(100)
 );
 
--- Даём права на таблицу и последовательность (на всякий случай, хотя владелец уже testuser)
+-- Даём права на таблицу и последовательность
 GRANT ALL PRIVILEGES ON TABLE users TO testuser;
 GRANT ALL PRIVILEGES ON SEQUENCE users_id_seq TO testuser;
 
