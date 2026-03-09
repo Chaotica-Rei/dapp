@@ -20,10 +20,39 @@ sudo systemctl start valkey
 sudo systemctl enable valkey
 ```
 
-4. Клонируем Git-репозиторий на VM1, запускаем создание БД:
+4. Клонируем Git-репозиторий на виртуальные машины VM1 и VM2:
 
 ```bash
 git clone https://github.com/Chaotica-Rei/dapp.git
+```
+
+5. Настраиваем сетевое взаимодействие
+
+На VM1:
+
+```bash
+cd dapp/scripts
+sudo chmod +x ubuntu-rules.sh
+sudo ./ubuntu-rules.sh
+```
+
+на VM2:
+
+```bash
+cd dapp/scripts
+sudo chmod +x centos-rules.sh
+sudo ./centos-rules.sh
+```
+
+6. Запускаем создание БД на VM1:
+
+```bash
 cd dapp/db
 psql -f init.sql
 ```
+
+7. Устанавливаем пакеты
+
+На VM1:
+
+На VM2:
