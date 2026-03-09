@@ -23,6 +23,7 @@ sudo systemctl enable valkey
 4. Клонируем Git-репозиторий на VM1, запускаем создание БД:
 
 ```bash
-cd db
+git clone https://github.com/Chaotica-Rei/dapp.git
+cd dapp/db
 psql -f init.sql
 ```
