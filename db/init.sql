@@ -1,3 +1,5 @@
+--Запуск через psql -U postgres -f init.sql
+
 -- Удаляем БД если существует
 DROP DATABASE IF EXISTS test;
 
@@ -12,12 +14,6 @@ CREATE DATABASE test OWNER testuser;
 
 -- Даём все права на БД
 GRANT ALL PRIVILEGES ON DATABASE test TO testuser;
-
--- Удаляем БД test, если она существует
---DROP DATABASE IF EXISTS test;
-
--- Создаём БД test (владельцем автоматически становится testuser)
---CREATE DATABASE test;
 
 -- Подключаемся к БД test
 \c test
