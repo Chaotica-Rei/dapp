@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+# Создаём пользователя, если его нет
+if ! id "backend-api" &>/dev/null; then
+    adduser --system --group --no-create-home --shell /bin/false backend-api
+fi
+
+# Перезагружаем systemd
+systemctl daemon-reload
+
+# Включаем сервис при загрузке
+systemctl enable backend-api.service
+
+# Запускаем сервис
+systemctl start backend-api.service
+
+echo "Backend API service installed and started."

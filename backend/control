@@ -1,0 +1,8 @@
+Package: backend-api
+Version: 1.0.0
+Section: base
+Priority: optional
+Architecture: amd64
+Depends: postgresql, systemd
+Maintainer: Chaotica <chaotica.rei@gmail.com>
+Description: Backend API service with systemd integration
