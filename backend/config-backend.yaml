@@ -1,5 +1,5 @@
 database:
-  host: "postgres"
+  host: "192.168.0.177" # заменить на IP хоста, на котором запущен PostgreSQL
   port: "5432"
   user: "testuser"
   password: "testpass"
