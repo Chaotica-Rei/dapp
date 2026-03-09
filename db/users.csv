@@ -1,4 +1,5 @@
-﻿John Doe,30,john.doe@example.com
+﻿name,age,email
+John Doe,30,john.doe@example.com
 Jane Smith,25,jane.smith@example.com
 Bob Johnson,40,bob.johnson@example.com
 Alice Brown,28,alice.brown@example.com
