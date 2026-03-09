@@ -5,7 +5,7 @@ import os
 import yaml
 
 # Загружаем конфиг из файла
-config_path = os.getenv("CONFIG_PATH", "/etc/cache-api/config.yaml")
+config_path = os.getenv("CONFIG_PATH", "/etc/cache-api/config-api.yaml")
 try:
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
