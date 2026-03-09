@@ -1,10 +1,23 @@
--- Запуск от пользователя testuser через psql -U testuser -d test -f init_db.sql
-
--- Удаляем БД test, если она существует
+-- Удаляем БД если существует
 DROP DATABASE IF EXISTS test;
 
+-- Удаляем пользователя если существует
+DROP ROLE IF EXISTS testuser;
+
+-- Создаем пользователя
+CREATE USER testuser WITH PASSWORD 'testpass';
+
+-- Создаем базу данных и сразу назначаем владельца
+CREATE DATABASE test OWNER testuser;
+
+-- Даём все права на БД
+GRANT ALL PRIVILEGES ON DATABASE test TO testuser;
+
+-- Удаляем БД test, если она существует
+--DROP DATABASE IF EXISTS test;
+
 -- Создаём БД test (владельцем автоматически становится testuser)
-CREATE DATABASE test;
+--CREATE DATABASE test;
 
 -- Подключаемся к БД test
 \c test
