@@ -38,7 +38,7 @@ func main() {
 	// Читаем конфиг-файл
 	configPath := os.Getenv("CONFIG_PATH")
 	if configPath == "" {
-		configPath = "/etc/backend-api/config.yaml"
+		configPath = "/etc/backend-api/config-backend.yaml"
 	}
 	cfg, _ := loadConfig(configPath)
 
