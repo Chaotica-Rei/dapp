@@ -3,7 +3,7 @@
 # Очищаем все текущие правила iptables
 iptables -F
 
-# Разрешаем весь трафик через loopback (localhost) для работы локальных сервисов (proxy ↔ valkey)
+# Разрешаем весь трафик через loopback (localhost) для работы локальных сервисов (прокси, valkey)
 iptables -A INPUT -i lo -j ACCEPT
 
 # Разрешаем SSH, чтобы можно было подключаться к ВМ
