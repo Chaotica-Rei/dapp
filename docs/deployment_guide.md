@@ -4,11 +4,9 @@
 - для Backend API + PostgreSQL - Ubuntu 24.04.3 LTS (IP 192.168.0.177)
 - для прокси + Redis - CentOS Stream 10 (IP 192.168.0.117)
 
-
-
 ![Развернутые ВМ в VirtualBox](../assets/vm.png)
 
-1. Установка PostgreSQL на VM1 (Ubuntu):  
+2. Установка PostgreSQL на VM1 (Ubuntu):  
 
 ```bash
 sudo apt update
@@ -17,9 +15,11 @@ sudo systemctl start postgresql
 sudo systemctl enable postgresql
 ```
 
-Редактируем /etc/hosts, добавялем запись:
+Редактируем **/etc/hosts**, добавляем запись:
 
-`127.0.0.1 postgres`
+```
+127.0.0.1 postgres
+```
 
 3. Установка Redis на VM2 (CentOS), используется форк **Valkey 8.0.6**:  
 
@@ -29,7 +29,8 @@ sudo dnf install valkey
 sudo systemctl start valkey  
 sudo systemctl enable valkey
 ```
-Редактируем **/etc/hosts**, добавляем записи:  
+
+Редактируем **/etc/hosts**, добавляем записи (для backend-api использовать фактический IP-адрес ВМ, на котором хостится бэкенд):  
 
 ```
 127.0.0.1 valkey 
