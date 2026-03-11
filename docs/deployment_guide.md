@@ -1,8 +1,14 @@
 1. Разворачивание ВМ 
 
+В VirtualBox развернуты 2 ВМ с сетевым адаптером Bridged:  
+- для Backend API + PostgreSQL - Ubuntu 24.04.3 LTS (IP 192.168.0.177)
+- для прокси + Redis - CentOS Stream 10 (IP 192.168.0.117)
+
+
+
 ![Развернутые ВМ в VirtualBox](../assets/vm.png)
 
-2. Установка PostgreSQL на VM1 (Ubuntu):  
+1. Установка PostgreSQL на VM1 (Ubuntu):  
 
 ```bash
 sudo apt update
@@ -11,9 +17,11 @@ sudo systemctl start postgresql
 sudo systemctl enable postgresql
 ```
 
-Редактируем /etc/hosts, добавялем запись 127.0.0.1 postgres
+Редактируем /etc/hosts, добавялем запись:
 
-3. Установка Redis на VM2 (CentOS), используется форк Valkey 8.0.6:  
+`127.0.0.1 postgres`
+
+3. Установка Redis на VM2 (CentOS), используется форк **Valkey 8.0.6**:  
 
 ```bash
 sudo dnf update  
@@ -21,7 +29,12 @@ sudo dnf install valkey
 sudo systemctl start valkey  
 sudo systemctl enable valkey
 ```
-Редактируем /etc/hosts, добавляем записи 127.0.0.1 valkey и 192.168.0.177 backend-api (для backend-api использовать фактический IP-адрес ВМ с бэкендом)
+Редактируем **/etc/hosts**, добавляем записи:  
+
+```
+127.0.0.1 valkey 
+192.168.0.177 backend-api
+```
 
 4. Клонируем Git-репозиторий на виртуальные машины VM1 и VM2:
 
