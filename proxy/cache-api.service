@@ -1,0 +1,12 @@
+[Unit]
+Description=Cache API Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/lib/cache-api/cache-api.py
+Restart=always
+Environment=CONFIG_PATH=/etc/cache-api/config-api.yaml
+
+[Install]
+WantedBy=multi-user.target
