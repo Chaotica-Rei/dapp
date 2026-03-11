@@ -21,15 +21,13 @@ go mod tidy
 GOOS=linux GOARCH=amd64 go build -o backend-api backend-api.go
 ```
 
-Созданный бинарник перемещаем в директорию backend-api-package/usr/local/bin/
+После выполнения команды:
 
-Конфиг [config-backend.yaml](../backend/config-backend.yaml) перемещаем в директорию backend-api-package/etc/backend-api/
-
-Systemd-юнит [backend-api.service](../backend/backend-api.service) перемещаем в директорию backend-api-package/lib/systemd/system/ 
-
-Файл [control](../backend/control) перемещаем в директорию backend-api-package/DEBIAN/
-
-Файл [postinst](../backend/postinst) перемещаем в директорию backend-api-package/DEBIAN/ и делаем его исполняемым `sudo chmod +x postinst`
+- созданный бинарник перемещаем в директорию backend-api-package/usr/local/bin/
+- конфиг [config-backend.yaml](../backend/config-backend.yaml) перемещаем в директорию backend-api-package/etc/backend-api/
+- systemd-юнит [backend-api.service](../backend/backend-api.service) перемещаем в директорию backend-api-package/lib/systemd/system/ 
+- файл [control](../backend/control) перемещаем в директорию backend-api-package/DEBIAN/
+- файл [postinst](../backend/postinst) перемещаем в директорию backend-api-package/DEBIAN/ и делаем его исполняемым `sudo chmod +x postinst`
 
 В итоге должна получиться следующая структура каталогов и файлов:
 
