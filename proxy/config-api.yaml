@@ -1,9 +1,9 @@
 redis:
-  host: "valkey" # прописать в /etc/hosts
+  host: "valkey" 
   port: 6379
 
 backend:
-  host: "backend-api" # прописать в /etc/hosts IP-адрес бэкенда 
+  host: "backend-api"  
   port: 8080
 
 app:
