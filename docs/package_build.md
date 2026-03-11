@@ -1,6 +1,6 @@
 ## Инструкция по сборке .deb пакета для Backend API и .rpm пакета для Proxy API
 
-1. Сборка .deb пакета для Backend API
+### 1. Сборка .deb пакета для Backend API
 
 Готовим структуру для сборки:
 
@@ -48,7 +48,7 @@ sudo chmod 755 backend-api-package/DEBIAN/postinst
 sudo dpkg-deb --build . ../backend-api_1.0.0_amd64.deb
 ```
 
-2. Сборка .rpm пакета для Proxy API
+#### 2. Сборка .rpm пакета для Proxy API
 
 Устанавливаем инструменты для сборки:
 
