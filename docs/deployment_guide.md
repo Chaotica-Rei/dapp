@@ -11,6 +11,8 @@ sudo systemctl start postgresql
 sudo systemctl enable postgresql
 ```
 
+Редактируем /etc/hosts, добавялем запись 127.0.0.1 postgres
+
 3. Установка Redis на VM2 (CentOS), используется форк Valkey 8.0.6:  
 
 ```bash
@@ -19,6 +21,7 @@ sudo dnf install valkey
 sudo systemctl start valkey  
 sudo systemctl enable valkey
 ```
+Редактируем /etc/hosts, добавляем записи 127.0.0.1 valkey и 192.168.0.177 backend-api
 
 4. Клонируем Git-репозиторий на виртуальные машины VM1 и VM2:
 
@@ -26,7 +29,14 @@ sudo systemctl enable valkey
 git clone https://github.com/Chaotica-Rei/dapp.git
 ```
 
-5. Настраиваем сетевое взаимодействие
+5. На VM1 запускаем создание пользователя testuser, БД test и таблицы users в PostgreSQL:
+
+```bash
+cd dapp/db
+psql -U postgres -f init.sql
+```
+
+6. Настраиваем сетевое взаимодействие
 
 На VM1:
 
@@ -41,18 +51,35 @@ sudo ./ubuntu-rules.sh
 ```bash
 cd dapp/scripts
 sudo chmod +x centos-rules.sh
-sudo ./centos-rules.sh
-```
-
-6. Запускаем создание БД на VM1:
-
-```bash
-cd dapp/db
-psql -f init.sql
+sudo ./centos-rules.sh  
 ```
 
 7. Устанавливаем пакеты
 
 На VM1:
 
+```bash
+cd dapp/packages  
+sudo dpkg -i backend-api_1.0.0_amd64.deb  
+```
+Проверка статуса сервиса и журнал:
+
+```bash
+sudo systemctl status backend-api.service  
+sudo journalctl -u backend-api.service -f
+```
+
 На VM2:
+
+```bash
+cd dapp/packages
+sudo dnf install cache-api-1.0-1.el10.noarch.rpm
+```
+
+Запуск сервиса и проверка статуса:
+
+```bash
+sudo systemctl enable cache-api  
+sudo systemctl start cache-api
+sudo systemctl status cache-api
+```
