@@ -21,7 +21,7 @@ sudo dnf install valkey
 sudo systemctl start valkey  
 sudo systemctl enable valkey
 ```
-Редактируем /etc/hosts, добавляем записи 127.0.0.1 valkey и 192.168.0.177 backend-api
+Редактируем /etc/hosts, добавляем записи 127.0.0.1 valkey и 192.168.0.177 backend-api (для backend-api использовать фактический IP-адрес ВМ с бэкендом)
 
 4. Клонируем Git-репозиторий на виртуальные машины VM1 и VM2:
 
