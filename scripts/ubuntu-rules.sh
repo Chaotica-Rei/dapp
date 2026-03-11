@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Скрипт для настройки iptables на Backend (Ubuntu 24.04.3 LTS)
+# Для приема запросов Backend'ом от прокси указываем IP-адрес ВМ прокси (в данном примере 192.168.0.117)
+
 echo "Applying iptables rules for BACKEND (Ubuntu 24.04.3 LTS)..."
 
 # Очистка
@@ -19,7 +22,7 @@ iptables -A OUTPUT -o lo -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Backend принимает запросы только от прокси (указать фактический IP-адрес прокси)
+# Backend принимает запросы только от прокси (указать фактический IP-адрес ВМ прокси)
 iptables -A INPUT -p tcp -s 192.168.0.117 --dport 8080 -j ACCEPT
 
 # Backend имеет доступ только к PostgreSQL
