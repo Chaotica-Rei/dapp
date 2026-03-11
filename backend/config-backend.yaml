@@ -1,5 +1,5 @@
 database:
-  host: "postgres" # прописать в /etc/hosts
+  host: "postgres"
   port: "5432"
   user: "testuser"
   password: "testpass"
