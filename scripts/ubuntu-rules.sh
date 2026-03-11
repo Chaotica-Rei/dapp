@@ -1,19 +1,40 @@
 #!/bin/bash
 
-# Очищаем все текущие правила iptables
+echo "Applying iptables rules for BACKEND (Ubuntu)..."
+
+# Очистка
 iptables -F
+iptables -X
 
-# Разрешаем loopback
+# Политики
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# localhost
 iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
 
-# Разрешаем SSH
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+# установленные соединения
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Backend принимает только от прокси (-s <IP> - указывать фактический IP-адрес ВМ, на котором работает прокси)
-iptables -A INPUT -p tcp --dport 8080 -s 192.168.0.117 -j ACCEPT
+# -------------------------
+# Backend принимает запросы ТОЛЬКО от Proxy
+# -------------------------
 
-# PostgreSQL принимает только от Backend (localhost)
-iptables -A INPUT -p tcp --dport 5432 -s 127.0.0.1 -j ACCEPT
+iptables -A INPUT -p tcp -s 192.168.0.117 --dport 8080 -j ACCEPT
 
-# Остальное запрещаем
-iptables -A INPUT -j DROP
+# -------------------------
+# Backend имеет доступ только к PostgreSQL
+# -------------------------
+
+iptables -A OUTPUT -p tcp --dport 5432 -j ACCEPT
+
+# -------------------------
+# PostgreSQL принимает только от Backend (локально)
+# -------------------------
+
+iptables -A INPUT -p tcp -s 127.0.0.1 --dport 5432 -j ACCEPT
+
+echo "Backend rules applied"

@@ -1,19 +1,42 @@
 #!/bin/bash
 
-# Очищаем все текущие правила iptables
+echo "Applying iptables rules for PROXY (CentOS)..."
+
+# Очистка
 iptables -F
+iptables -X
 
-# Разрешаем весь трафик через loopback (localhost) для работы локальных сервисов (прокси, valkey)
+# Политики по умолчанию
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# Разрешаем localhost
 iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
 
-# Разрешаем SSH, чтобы можно было подключаться к ВМ
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+# Разрешаем уже установленные соединения
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Разрешаем входящие подключения к прокси со всех источников, прокси слушает порт 5000 (Flask)
+# -------------------------
+# Proxy принимает запросы от любого источника
+# -------------------------
+
+# Proxy API (5000)
 iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
 
-# Разрешаем доступ к Valkey только с localhost
-iptables -A INPUT -p tcp --dport 6379 -s 127.0.0.1 -j ACCEPT
+# -------------------------
+# Proxy имеет доступ к Backend
+# -------------------------
 
-# Запрещаем весь остальной входящий трафик
-iptables -A INPUT -j DROP
+iptables -A OUTPUT -p tcp -d 192.168.0.177 --dport 8080 -j ACCEPT
+
+# -------------------------
+# Proxy имеет доступ к Redis (локально)
+# -------------------------
+
+iptables -A OUTPUT -p tcp --dport 6379 -j ACCEPT
+iptables -A INPUT -p tcp --sport 6379 -j ACCEPT
+
+echo "Proxy rules applied"
