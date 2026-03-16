@@ -1,4 +1,4 @@
-1. Разворачивание ВМ 
+1. **Разворачивание ВМ** 
 
 В VirtualBox развернуты 2 ВМ с сетевым адаптером Bridged:  
 - для Backend API + PostgreSQL - Ubuntu 24.04.3 LTS (IP 192.168.0.177)
@@ -6,7 +6,7 @@
 
 ![Развернутые ВМ в VirtualBox](../assets/vm.png)
 
-2. Установка PostgreSQL на VM1 (Ubuntu):  
+2. **Установка PostgreSQL на VM1 (Ubuntu)**  
 
 ```bash
 sudo apt update
@@ -21,7 +21,7 @@ sudo systemctl enable postgresql
 127.0.0.1 postgres
 ```
 
-3. Установка Redis на VM2 (CentOS), используется форк **Valkey 8.0.6**:  
+3. **Установка Redis на VM2 (CentOS), используется форк Valkey 8.0.6**  
 
 ```bash
 sudo dnf update  
@@ -37,20 +37,20 @@ sudo systemctl enable valkey
 192.168.0.177 backend-api
 ```
 
-4. Клонируем Git-репозиторий на виртуальные машины VM1 и VM2:
+4. **Клонирование Git-репозитория на виртуальные машины VM1 и VM2**
 
 ```bash
 git clone https://github.com/Chaotica-Rei/dapp.git
 ```
 
-5. На VM1 запускаем создание пользователя testuser, БД test и таблицы users в PostgreSQL:
+5. **Запуск создания пользователя testuser, БД test и таблицы users в PostgreSQL на VM1**
 
 ```bash
 cd dapp/db
 psql -U postgres -f init.sql
 ```
 
-6. Настраиваем сетевое взаимодействие
+6. **Настройка сетевого взаимодействия**
 
 На VM1:
 
@@ -68,7 +68,7 @@ sudo chmod +x centos-rules.sh
 sudo ./centos-rules.sh  
 ```
 
-7. Устанавливаем пакеты
+7. **Установка пакетов**
 
 На VM1:
 
